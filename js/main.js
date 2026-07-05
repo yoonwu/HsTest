@@ -12,6 +12,57 @@
   var tabbar = document.getElementById("tabbar");
   var video = document.getElementById("reelVideo");
 
+  /* ---------- background music ---------- */
+  var bgm = document.getElementById("bgm");
+  var bgmBtn = document.getElementById("bgmToggle");
+  var BGM_VOL = 0.5;
+  var wantMusic = false; // user's intent
+  var fadeTimer = null;
+
+  function fadeTo(target, ms, thenPause) {
+    if (!bgm) return;
+    if (fadeTimer) clearInterval(fadeTimer);
+    var start = bgm.volume;
+    var steps = Math.max(1, Math.round(ms / 40));
+    var i = 0;
+    fadeTimer = setInterval(function () {
+      i++;
+      bgm.volume = Math.min(1, Math.max(0, start + (target - start) * (i / steps)));
+      if (i >= steps) {
+        clearInterval(fadeTimer);
+        fadeTimer = null;
+        if (thenPause) bgm.pause();
+      }
+    }, 40);
+  }
+
+  function startMusic() {
+    if (!bgm) return;
+    bgm.volume = 0;
+    var p = bgm.play();
+    if (p && p.catch) p.catch(function () {});
+    fadeTo(BGM_VOL, 900);
+    bgmBtn.classList.add("is-playing");
+    bgmBtn.setAttribute("aria-pressed", "true");
+  }
+  function stopMusic() {
+    fadeTo(0, 500, true);
+    bgmBtn.classList.remove("is-playing");
+    bgmBtn.setAttribute("aria-pressed", "false");
+  }
+
+  if (bgmBtn) {
+    bgmBtn.addEventListener("click", function () {
+      wantMusic = !wantMusic;
+      if (wantMusic) startMusic();
+      else stopMusic();
+    });
+  }
+
+  // Duck the music while the acting reel plays so the monologue stays clear.
+  function duck() { if (wantMusic && bgm && !bgm.paused) fadeTo(0.08, 400); }
+  function unduck() { if (wantMusic && bgm) { if (bgm.paused) bgm.play().catch(function(){}); fadeTo(BGM_VOL, 700); } }
+
   function activate(name, scroll) {
     if (!panels[name]) return;
     tabs.forEach(function (t) {
@@ -57,6 +108,13 @@
   // deep link: #profile / #daily / #reel / #stills
   var initial = location.hash.replace("#", "");
   if (panels[initial]) activate(initial, false);
+
+  // reel audio vs. BGM: duck while the video plays, restore when it stops
+  if (video) {
+    video.addEventListener("play", duck);
+    video.addEventListener("pause", unduck);
+    video.addEventListener("ended", unduck);
+  }
 
   /* ---------- stills → jump into the reel ---------- */
   document.querySelectorAll(".card.still").forEach(function (card) {

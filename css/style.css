@@ -516,6 +516,62 @@ main { min-height: 60vh; }
 .lb-prev { left: 10px; top: 50%; transform: translateY(-50%); font-size: 52px; }
 .lb-next { right: 10px; top: 50%; transform: translateY(-50%); font-size: 52px; }
 
+/* ============================================================
+   BGM TOGGLE
+   ============================================================ */
+.bgm-toggle {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px 11px 14px;
+  background: rgba(10, 10, 11, 0.72);
+  border: 1px solid var(--line);
+  backdrop-filter: blur(10px);
+  cursor: pointer;
+  color: var(--ink-dim);
+  transition: color 0.3s, border-color 0.3s, background 0.3s;
+}
+.bgm-toggle:hover { color: var(--ink); border-color: rgba(242,239,233,0.32); }
+.bgm-toggle .bgm-label {
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: 11px;
+  letter-spacing: 0.28em;
+}
+.bgm-toggle.is-playing { color: var(--ink); border-color: var(--red); }
+
+/* equalizer bars */
+.eq { display: flex; align-items: flex-end; gap: 2px; height: 14px; }
+.eq i {
+  width: 3px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 1px;
+}
+.bgm-toggle.is-playing .eq i { background: var(--red); animation: eq 0.9s ease-in-out infinite; }
+.bgm-toggle.is-playing .eq i:nth-child(1) { animation-delay: 0s; }
+.bgm-toggle.is-playing .eq i:nth-child(2) { animation-delay: 0.2s; }
+.bgm-toggle.is-playing .eq i:nth-child(3) { animation-delay: 0.4s; }
+.bgm-toggle.is-playing .eq i:nth-child(4) { animation-delay: 0.15s; }
+@keyframes eq {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}
+/* paused state: flat, dim bars */
+.bgm-toggle:not(.is-playing) .eq i:nth-child(1) { height: 4px; }
+.bgm-toggle:not(.is-playing) .eq i:nth-child(2) { height: 8px; }
+.bgm-toggle:not(.is-playing) .eq i:nth-child(3) { height: 5px; }
+.bgm-toggle:not(.is-playing) .eq i:nth-child(4) { height: 9px; }
+
+@media (max-width: 560px) {
+  .bgm-toggle .bgm-label { display: none; }
+  .bgm-toggle { padding: 11px 13px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
   html { scroll-behavior: auto; }

@@ -13,6 +13,16 @@
 <body>
   <div class="grain" aria-hidden="true"></div>
 
+  <!-- ===== Background music ===== -->
+  <audio id="bgm" loop preload="auto">
+    <source src="assets/audio/bgm.ogg" type="audio/ogg">
+    <source src="assets/audio/bgm.mp3" type="audio/mpeg">
+  </audio>
+  <button id="bgmToggle" class="bgm-toggle" aria-pressed="false" aria-label="배경음악 켜기/끄기" title="배경음악">
+    <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+    <span class="bgm-label">SOUND</span>
+  </button>
+
   <!-- ===== Intro / Hero ===== -->
   <header class="hero" id="home">
     <div class="hero-bg">

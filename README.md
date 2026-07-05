@@ -11,6 +11,8 @@
 | 03 연기 영상 | 독백 연기 영상 (02:01) |
 | 04 스냅 · 스틸컷 | 영상에서 추출한 스틸 6장 — 클릭 시 해당 장면부터 재생 |
 
+우측 하단 **SOUND** 버튼으로 시네마틱 앰비언트 배경음악(A단조, 33초 심리스 루프)을 켜고 끌 수 있습니다. 연기 영상을 재생하면 배경음악이 자동으로 작아졌다가(더킹) 영상이 멈추면 원래 크기로 돌아옵니다.
+
 ## 로컬 실행
 
 ```bash
@@ -27,4 +29,5 @@ python3 -m http.server 8000
 - **이름/이메일 변경**: `index.html`에서 `김흥섭`, `KIM HEUNGSEOP`, `thdghkstlr@gmail.com` 검색 후 수정
 - **사진 교체**: `assets/img/`의 파일을 같은 이름으로 교체
 - **영상 교체**: `assets/video/acting-reel.mp4` 교체 (스틸컷 타임코드는 `index.html`의 `data-time` 속성으로 조정)
+- **배경음악 교체**: `assets/audio/bgm.mp3` / `bgm.ogg` 교체 (볼륨은 `js/main.js`의 `BGM_VOL` 값으로 조정)
 - **포인트 컬러 변경**: `css/style.css` 상단 `--red` 변수
