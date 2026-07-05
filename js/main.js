@@ -1,4 +1,4 @@
-/* SONG HANSIK — actor portfolio interactions */
+/* KIM HEUNGSEOP — actor portfolio interactions */
 (function () {
   "use strict";
 

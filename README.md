@@ -1,4 +1,4 @@
-# 송한식 — Actor Portfolio
+# 김흥섭 — Actor Portfolio
 
 배우 프로필 전용 원페이지 웹사이트. 제작자·캐스팅 디렉터에게 보여주기 위한 시네마틱 느와르 컨셉의 정적 사이트입니다.
 
@@ -24,7 +24,7 @@ python3 -m http.server 8000
 
 ## 수정 포인트
 
-- **이름/이메일 변경**: `index.html`에서 `송한식`, `SONG HANSIK`, `thdghkstlr@gmail.com` 검색 후 수정
+- **이름/이메일 변경**: `index.html`에서 `김흥섭`, `KIM HEUNGSEOP`, `thdghkstlr@gmail.com` 검색 후 수정
 - **사진 교체**: `assets/img/`의 파일을 같은 이름으로 교체
 - **영상 교체**: `assets/video/acting-reel.mp4` 교체 (스틸컷 타임코드는 `index.html`의 `data-time` 속성으로 조정)
 - **포인트 컬러 변경**: `css/style.css` 상단 `--red` 변수
